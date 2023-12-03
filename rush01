@@ -21,14 +21,14 @@ int buscar(int **matriz, int valor, int x, int y, int tam)
     salida = 0;
     while(rx <= tam)
     {
-        if((matriz[rx][y] != valor || (rx = x && ry = y)))
+        if((matriz[rx][y] != valor || (rx == x && ry == y)))
             rx++;
         else 
         return (0);
     }
     while(ry <= tam)
     {
-        if((matriz[ry][y] != valor || (ry = x && ry = y)))
+        if((matriz[ry][y] != valor || (ry == x && ry == y)))
             ry++;
         else 
         return (0);
@@ -75,6 +75,39 @@ void    insertar(int **matriz, int x, int y, int val)
     else
         write(1, "Error\n", 6);
 }
+int** resolverL4(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
+{
+    write(1, "\nL4\n", 4);
+    int x = 0;
+    int y;
+    int aux;
+    while(x < tam)
+    {
+        if(vi[x] == 1 && vd[x] == 2)
+        {
+            y = 0;
+            while(y < tam-1)
+            {
+                insertar(matriz, x, y+1, y+1);
+                y++;
+            }
+        }
+        
+        
+        if(vup[x] == 1 && vdown[x] == 2)
+        {
+            y = 0;
+            while(y < tam-1)
+            {
+                insertar(matriz, y+1, x, y+1);
+                y++;
+            }
+        }
+        x++;
+    }
+    mostrar(matriz, tam);
+//    return(resolverL4(matriz, tam, vi, vd, vup, vdown));
+}
 int** resolverL3(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
 {
     write(1, "\nL3\n", 4);
@@ -83,33 +116,30 @@ int** resolverL3(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
     int aux;
     while(x < tam)
     {
-        if(vi[x] == tam-1)
+        if(vi[x] == tam-1 && vd[x] == tam-2)
         {
             y = 0;
-            //Quede aca
-            if(matriz[x][0] <= tam-2 && buscar(matriz, valor, x, 0, tam) && matriz[x][1] <= tam-1 && matriz[x][2] <= tam)
+            while(y < tam-1)
             {
-                insertar(matriz, x, tam-2, tam);
-                insertar(matriz, x, tam-3, tam-1);
-                insertar(matriz, x, tam-4, tam-2);
+                insertar(matriz, x, y, tam-2+y);
+                y++;
             }
+            insertar(matriz, x, y, 1);
         }
-        if(vd[x] == 1)
+        if(vup[x] == tam-1 && vdown[x] == tam-2)
         {
-            insertar(matriz, x, tam-1, tam);
-        }
-        if(vup[x] == 1)
-        {
-            insertar(matriz, 0, x, tam);
-        }
-        if(vdown[x] == 1)
-        {
-            insertar(matriz, tam-1, x, tam);
+            y = 0;
+            while(y < tam-1)
+            {
+                insertar(matriz, y, x, tam-2+y);
+                y++;
+            }
+            insertar(matriz, y, x, 1);
         }
         x++;
     }
     mostrar(matriz, tam);
-//    return(resolverL4(matriz, tam, vi, vd, vup, vdown));
+    return(resolverL4(matriz, tam, vi, vd, vup, vdown));
 }
 
 int** resolverL2(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
