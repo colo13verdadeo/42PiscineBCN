@@ -75,6 +75,42 @@ void    insertar(int **matriz, int x, int y, int val)
     else
         write(1, "Error\n", 6);
 }
+int** resolverL5(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
+{
+    write(1, "\nL4\n", 4);
+    int x = 0;
+    int y;
+    int aux;
+    while(x < tam)
+    {
+        if(vi[x] == 2 && vd[x] == 2)
+        {
+            if(matriz[x][1] == tam)
+            y = 0;
+            insertar(matriz, x, y, tam-1);
+            while(y < tam-2)
+            {
+                insertar(matriz, x, y+2, y+1);
+                y++;
+            }
+        }
+        
+        if(vup[x] == 2 && vdown[x] == 2)
+        {
+            if(matriz[1][x] == tam)
+            y = 0;
+            insertar(matriz, y, x, tam-1);
+            while(y < tam-2)
+            {
+                insertar(matriz, y+2, x, y+1);
+                y++;
+            }
+        }
+        x++;
+    }
+    mostrar(matriz, tam);
+    return(matriz);
+}
 int** resolverL4(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
 {
     write(1, "\nL4\n", 4);
@@ -106,7 +142,7 @@ int** resolverL4(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
         x++;
     }
     mostrar(matriz, tam);
-//    return(resolverL4(matriz, tam, vi, vd, vup, vdown));
+    return(resolverL5(matriz, tam, vi, vd, vup, vdown));
 }
 int** resolverL3(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
 {
