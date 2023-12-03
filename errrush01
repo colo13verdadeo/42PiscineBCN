@@ -90,8 +90,11 @@ int** resolverL5(int **matriz, int tam, int *vi, int *vd, int *vup, int *vdown)
     int x = 0;
     int y;
     int aux;
+    
+    y = 0;
     while(x < tam)
     {
+        //Error aca
         if(vi[x] == 2 && vd[x] == 2)
         {
             if(matriz[x][1] == tam)
