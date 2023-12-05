@@ -1,0 +1,77 @@
+C03-ex05
+/* ************************************************************************** */
+
+/*                                                                            */
+
+/*                                                        :::      ::::::::   */
+
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
+
+/*                                                    +:+ +:+         +:+     */
+
+/*   By: ybayart <marvin@42.fr>                     +#+  +:+       +#+        */
+
+/*                                                +#+#+#+#+#+   +#+           */
+
+/*   Created: 2019/07/30 22:39:22 by ybayart           #+#    #+#             */
+
+/*   Updated: 2019/07/30 22:39:35 by ybayart          ###   ########.fr       */
+
+/*                                                                            */
+
+/* ************************************************************************** */
+
+
+
+#include <unistd.h>
+
+
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+
+{
+
+	unsigned int	index;
+
+	unsigned int	index2;
+
+	unsigned int	index3;
+
+
+
+	index = 0;
+
+	index2 = 0;
+
+	index3 = 0;
+
+	while (src[index] != '\0')
+
+		index++;
+
+	while (dest[index2] != '\0')
+
+		index2++;
+
+	while (index3 != index)
+
+	{
+
+		dest[index2] = src[index3];
+
+		index3++;
+
+		index2++;
+
+	}
+
+	dest[index2] = NULL;
+
+	if (size <= index)
+
+		return (size + index);
+
+	return (size);
+
+}
+
