@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmonzon- <jmonzon-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/11 18:40:33 by jmonzon-          #+#    #+#             */
+/*   Updated: 2023/12/11 20:00:34 by jmonzon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	i1[4];
+
+	i1[0] = 0;
+	i1[1] = 0;
+	while (dest[i1[0]])
+		i1[0]++;
+	while (src[i1[1]])
+		i1[1]++;
+	if (size < i1[0])
+		i1[2] = i1[1] + size;
+	else
+		i1[2] = i1[1] + i1[0];
+	i1[1] = 0;
+	while (src[i1[1]] && size - 1 > i1[1])
+		dest[i1[0]++] = src[i1[1]++];
+	dest[i1[0]] = '\0';
+	return (i1[2]);
+}
