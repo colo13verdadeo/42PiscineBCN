@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmonzon- <jmonzon-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 10:56:18 by jmonzon-          #+#    #+#             */
-/*   Updated: 2023/12/13 19:33:30 by jmonzon-         ###   ########.fr       */
+/*   Created: 2023/12/11 18:40:33 by jmonzon-          #+#    #+#             */
+/*   Updated: 2023/12/11 20:00:34 by jmonzon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_strcmp(char *s1, char *s2)
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
-	int	index;
+	unsigned int	i1[4];
 
-	index = 0;
-	while (s1[index] && s2[index] && s1[index] == s2[index])
-		index++;
-	return (s1[index] - s2[index]);
+	i1[0] = 0;
+	i1[1] = 0;
+	while (dest[i1[0]])
+		i1[0]++;
+	while (src[i1[1]])
+		i1[1]++;
+	if (size < i1[0])
+		i1[2] = i1[1] + size;
+	else
+		i1[2] = i1[1] + i1[0];
+	i1[1] = 0;
+	while (src[i1[1]] && size - 1 > i1[1])
+		dest[i1[0]++] = src[i1[1]++];
+	dest[i1[0]] = '\0';
+	return (i1[2]);
 }
-/*int	main(void)
-{
-	ft_str("ABC", "ABCD");
-}*/
